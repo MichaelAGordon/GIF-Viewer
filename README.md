@@ -20,3 +20,5 @@ pip install Pillow
 
     Run the script by double-clicking the .pyw file or executing it from the terminal or command prompt.
     Use the user interface to select a GIF and start displaying it on your desktop.
+    The GIF should show up on your main monitor in the top left corner
+    If you want to close a GIF hit the ESC key and the last previously selected GIF or currently selected GIF will close
