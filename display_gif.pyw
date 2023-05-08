@@ -11,6 +11,7 @@ class TopLevelGif(tk.Toplevel):
 
         self.attributes('-topmost', True)
         self.overrideredirect(1)
+        self.wm_attributes('-transparentcolor', 'white')
 
         self.load_gif()
         self.bind("<Escape>", self.close_window)
@@ -26,11 +27,13 @@ class TopLevelGif(tk.Toplevel):
         gif = Image.open(self.gif_path)
         for frame in range(gif.n_frames):
             gif.seek(frame)
-            frame_image = ImageTk.PhotoImage(gif.copy().convert('RGBA'))
+            transparency = Image.new('RGBA', gif.size, (255, 255, 255, 0))
+            transparency.alpha_composite(gif.convert('RGBA'))
+            frame_image = ImageTk.PhotoImage(transparency)
             self.frames.append(frame_image)
             self.durations.append(gif.info['duration'])
 
-        self.label = tk.Label(self, image=self.frames[0], bd=0)
+        self.label = tk.Label(self, image=self.frames[0], bd=0, bg='white')
         self.label.pack()
 
         self.update_gif()
